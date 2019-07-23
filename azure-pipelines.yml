@@ -55,9 +55,6 @@ steps:
     artifactName: 'drop'
     artifactType: 'container'
   
-- script:
-    ./gradlew jacocoTestReport
-  
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit' 
@@ -70,23 +67,31 @@ steps:
     #buildConfiguration: # Optional
     publishRunAttachments: true 
 
+- script:
+    ./gradlew jacocoTestReport
+    ./gradlew sonarqube \
+    -Dsonar.projectKey=AkashMen10_MobileDevOpsDemo \
+    -Dsonar.organization=akashmen10 \
+    -Dsonar.host.url=https://sonarcloud.io \
+    -Dsonar.login=5f2095133106222b9d06f36e48a88cfc40e006a0 
+  
 - task: SonarCloudPrepare@1
   inputs:
-    SonarCloud: 'AndroidSonarCloud'
-    organization: 'silicusrnd'
+    SonarCloud: 'MobileDevOpsDemo'
+    organization: 'AkashMen10'
     scannerMode: 'CLI'
     configMode: 'manual'
-    cliProjectKey: 'ToDoList_CICD'
-    cliProjectName: 'ToDoList_CICD'
+    cliProjectKey: 'AkashMen10_MobileDevOpsDemo'
+    cliProjectName: 'MobileDevOpsDemo'
     cliSources: '$(system.defaultworkingdirectory)'
     extraProperties: '# Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      # sonar.projectkey : ToDoList_CICD
-        sonar.organization=silicusrnd,
+      # sonar.projectkey : AkashMen10_MobileDevOpsDemo
+        sonar.organization=AkashMen10,
         sonar.sources=java,
-        sonar.branch.name=Android-Development,
-        sonar.branch.target=Android-Development,
+        sonar.branch.name=master,
+        sonar.branch.target=master,
         sonar.projectVersion=1.0,
         sonar.java.coveragePlugin=jacoco,
         sonar.jacoco.reportPath=app/build/jacoco/testDevDebugUnitTest.exec,
