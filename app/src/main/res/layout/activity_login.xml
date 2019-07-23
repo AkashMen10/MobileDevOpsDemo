@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable type="com.example.todolistmvcapplication.models.User"
+                  name="user"/>
+    </data>
+
+    <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.example.todolistmvcapplication.activities.LoginActivity">
+
+
+        <LinearLayout
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/dimen_size_20"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/text_size_20"
+                    android:textStyle="bold"
+                    android:text="@string/login"
+                    style="@style/TextStyle"/>
+
+
+            <TextView
+                    android:layout_marginTop="@dimen/dimen_size_100"
+                    android:textSize="@dimen/text_size_18"
+                    android:text="@string/email"
+                    style="@style/TextStyle"/>
+
+            <EditText
+                    android:id="@+id/edt_email"
+                    android:layout_marginTop="@dimen/dimen_size_5"
+                    android:padding="@dimen/dimen_size_5"
+                    android:text="@={user.email}"
+                    android:inputType="textEmailAddress"
+                    android:background="@drawable/edittext_border"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:layout_marginTop="@dimen/dimen_size_30"
+                    android:textSize="@dimen/text_size_18"
+                    android:text="@string/password"
+                    style="@style/TextStyle"/>
+
+            <EditText
+                    android:id="@+id/edt_password"
+                    android:layout_marginTop="@dimen/dimen_size_5"
+                    android:padding="@dimen/dimen_size_5"
+                    android:background="@drawable/edittext_border"
+                    android:layout_width="match_parent"
+                    android:inputType="textPassword"
+                    android:text="@={user.password}"
+                    android:layout_height="wrap_content"/>
+
+            <Button
+                    android:id="@+id/btn_login"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/text_size_15"
+                    android:textColor="@color/white"
+                    android:text="@string/login"
+                    android:paddingLeft="@dimen/dimen_size_50"
+                    android:paddingStart="@dimen/dimen_size_50"
+                    android:paddingEnd="@dimen/dimen_size_50"
+                    android:paddingRight="@dimen/dimen_size_50"
+                    android:layout_marginTop="@dimen/dimen_size_20"
+                    android:minHeight="@dimen/dimen_size_35"
+                    android:background="@drawable/btn_bg"
+                    style="@style/TextStyle"/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>

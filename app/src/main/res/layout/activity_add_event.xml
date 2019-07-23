@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <data>
+
+        <import type="java.util.Date"/>
+        <import type="com.example.todolistmvcapplication.utils.DataConverter"/>
+
+        <variable name="handler" type="com.example.todolistmvcapplication.utils.DateTimePickerHandler"/>
+
+        <variable type="com.example.todolistmvcapplication.models.Event"
+                  name="event"/>
+    </data>
+
+    <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dimen_size_20"
+            tools:context=".activities.AddEventActivity">
+
+        <TextView
+                style="@style/TextStyle"
+                android:textSize="@dimen/text_size_18"
+                android:text="@string/event_name"/>
+
+        <EditText
+                android:id="@+id/edt_event_name"
+                android:layout_marginTop="@dimen/dimen_size_5"
+                android:padding="@dimen/dimen_size_10"
+                android:text="@={event.eventName}"
+                android:layout_width="match_parent"
+                android:background="@drawable/edittext_border"
+                style="@style/TextStyle"/>
+
+
+        <LinearLayout
+                android:layout_marginTop="@dimen/dimen_size_20"
+                android:layout_marginBottom="@dimen/dimen_size_20"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            <TextView
+                    android:id="@+id/txt_event_time"
+                    style="@style/TextStyle"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/text_size_18"
+                    android:text="@{DataConverter.dateToString(event.eventTime)}"/>
+
+            <Button
+                    android:text="@string/select"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_18"
+                    android:background="@drawable/btn_bg"
+                    android:id="@+id/btn_select_time"
+                    android:layout_weight="1"
+                    android:onClick="@{(view) -> handler.onClicked(view, event)}"
+                    style="@style/TextStyle"/>
+
+        </LinearLayout>
+
+
+        <TextView
+                style="@style/TextStyle"
+                android:textSize="@dimen/text_size_18"
+                android:text="@string/event_description"/>
+
+        <EditText
+                android:id="@+id/edt_event_description"
+                android:lines="6"
+                android:layout_width="match_parent"
+                android:gravity="top"
+                android:text="@={event.eventDescription}"
+                android:layout_marginTop="@dimen/dimen_size_5"
+                android:padding="@dimen/dimen_size_10"
+                android:background="@drawable/edittext_border"
+                style="@style/TextStyle"/>
+
+    </LinearLayout>
+</layout>

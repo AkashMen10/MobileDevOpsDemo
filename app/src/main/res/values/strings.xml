@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">TodoList</string>
+    <string name="event_name">Event Name</string>
+    <string name="event_description">Event Description</string>
+    <string name="event_time">Event Time</string>
+    <string name="select">Select</string>
+    <string name="add_event">Add Event</string>
+    <string name="to_do_list">ToDo List</string>
+    <string name="done">Done</string>
+    <string name="plz_enter_event_name">Please enter event name</string>
+    <string name="plz_enter_event_description">Please enter event description</string>
+    <string name="plz_select_proper_event_time">Please select proper event time</string>
+    <string name="no_events_to_show">No events to show</string>
+    <string name="event_added_to_db">Event added to database</string>
+    <string name="edit_event">Edit Event</string>
+    <string name="event_updated_in_db">Event updated in DB</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="login">Login</string>
+    <string name="plz_enter_password">Please enter password</string>
+    <string name="plz_enter_email">Please enter email</string>
+    <string name="plz_enter_valid_email">Please enter valid email</string>
+    <string name="password_length_should_be_atleast_6">Password length should be atleast 6 characters</string>
+</resources>

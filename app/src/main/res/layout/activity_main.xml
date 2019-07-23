@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:background="@color/grey_shade_02"
+        android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_todo"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/dimen_size_80"
+            android:background="@color/grey_shade_02"
+            android:paddingTop="@dimen/dimen_size_20"
+            android:layout_marginLeft="@dimen/dimen_size_10"
+            android:layout_marginRight="@dimen/dimen_size_10"
+            android:layout_marginStart="@dimen/dimen_size_10"
+            android:layout_marginEnd="@dimen/dimen_size_10"
+            android:layout_marginHorizontal="@dimen/dimen_size_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btn_add"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/dimen_size_20"
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:src="@android:drawable/ic_input_add"
+            android:layout_height="wrap_content"/>
+
+    <TextView
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:id="@+id/txt_no_data"
+            android:text="@string/no_events_to_show"
+            style="@style/TextStyle"/>
+
+</RelativeLayout>

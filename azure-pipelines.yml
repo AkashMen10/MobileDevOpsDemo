@@ -1,0 +1,101 @@
+# Android
+# Build your Android project with Gradle.
+# Add steps that test, sign, and distribute the APK, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/android
+
+pool:
+  vmImage: 'macOS 10.13'
+
+steps:
+- task: Gradle@2
+  inputs:
+    workingDirectory: ''
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx3072m'
+    tasks: 'assembleDebug'
+
+- task: Gradle@2
+  inputs:
+    workingDirectory: ''
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx3072m'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
+    tasks: 'testDebugUnitTest'
+
+- task: Gradle@2
+  inputs:
+    workingDirectory: ''
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx3072m'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
+    tasks: 'testDebugUnitTest'
+
+- task: Gradle@2
+  inputs:
+    workingDirectory: ''
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx3072m'
+    tasks: 'jacocoTestReport'
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Jacoco'
+    summaryFileLocation: '/Users/vsts/agent/2.153.2/work/1/s/app/build/reports/tests/testDebugUnitTest/index.html'
+
+- task: CopyFiles@2
+  inputs:
+    contents: '**/*.apk'
+    targetFolder: '$(build.artifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(build.artifactStagingDirectory)'
+    artifactName: 'drop'
+    artifactType: 'container'
+  script :
+  './gradlew jacocoTestReport'
+  publishHTML(target: [reportDir:'build/jacocoHtml', reportFiles: 'index.html', reportName: 'Code Coverage'])
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit' 
+    testResultsFiles: '**/TEST-.xml' 
+    searchFolder: '$(System.DefaultWorkingDirectory)' # Optional
+    mergeTestResults: true  
+    failTaskOnFailedTests: false 
+    #testRunTitle: # Optional
+    #buildPlatform: # Optional
+    #buildConfiguration: # Optional
+    publishRunAttachments: true 
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'AndroidSonarCloud'
+    organization: 'silicusrnd'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'ToDoList_CICD'
+    cliProjectName: 'ToDoList_CICD'
+    cliSources: '$(system.defaultworkingdirectory)'
+    extraProperties: '# Additional properties that will be passed to the scanner, 
+      # Put one key=value per line, example:
+      # sonar.exclusions=**/*.bin
+      # sonar.projectkey : ToDoList_CICD
+        sonar.organization=silicusrnd,
+        sonar.sources=java,
+        sonar.branch.name=Android-Development,
+        sonar.branch.target=Android-Development,
+        sonar.projectVersion=1.0,
+        sonar.java.coveragePlugin=jacoco,
+        sonar.jacoco.reportPath=app/build/jacoco/testDevDebugUnitTest.exec,
+        sonar.java.coverage.reportPath=Coverage.report,
+        sonar.java.coverage.reportPattern=sonar-reports/coverage*.xml'
+
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
