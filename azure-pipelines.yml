@@ -55,9 +55,9 @@ steps:
     artifactName: 'drop'
     artifactType: 'container'
   
-  script :
-  './gradlew jacocoTestReport'
-
+- script:
+    ./gradlew jacocoTestReport
+  
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit' 
